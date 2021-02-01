@@ -3,7 +3,7 @@
    include("DAL/GalleryDAL.php");
    $OrderAjax = BasicWorks::ParameterHelper('o',false,'POST');
 
-   $title = 'Galeria';
+   $title = 'Criar Item para Galeria';
 
    if($OrderAjax){
       switch($OrderAjax){
@@ -28,14 +28,8 @@
       }
    }
 
-   $arrayAbout =  GalleryDAL::SelectContact(1);
 
-   $arrayHTML['IMAGEHEAD'] =  $arrayAbout[0]["image_head"];
-   $arrayHTML['DESCSHORT'] = $arrayAbout[0]["description"];
-
-
-
-   $body =  BasicWorks::CreateTemplate('modules/gallery/template/gallery.tpl',$arrayHTML);
+   $body =  BasicWorks::CreateTemplate('modules/gallery/template/galleryitem.tpl',$arrayHTML);
 
 
 ?>
