@@ -8,19 +8,13 @@
             <form role="form">
                 <div class="card-body">
                     <div class="row ">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label ><h2>Imagem Cabeçalho</h2></label>
-                                    <div class="avatar-upload">
-                                        <div class="avatar-edit">
-                                            <input type='file' id="imageUploadHead" accept=".png, .jpg, .jpeg" />
-                                            <label for="imageUploadHead"><i class="fas fa-pencil-alt"></i>Editar</label>
-                                        </div>
-                                        <div class="avatar-preview">
-                                            <div id="imagePreviewHead" style="background-image: url([@IMAGEHEAD]);">
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="col-md-12">
+                            <fieldset class="form-group">
+                                <a href="javascript:void(0)" onclick="$('#pro-image').click()">Upload Image</a>
+                                <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+                            </fieldset>
+                            <div class="preview-images-zone">
+                                
                             </div>
                         </div>
                     </div>

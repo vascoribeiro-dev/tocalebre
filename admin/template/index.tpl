@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="theme.css">
     <link rel="stylesheet" href="modules/[@MODULE]/css/[@PAGE].css"></script>
 
-
-
     <script src="../ext/jquery/jquery-3.4.1.min.js"></script>
     <script src="../ext/select2/js/select2.min.js"></script>
     <script src="../ext/bootstrap-4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -22,6 +20,8 @@
     <script src="dist/js/adminlte.js"></script>
     <script type="text/javascript" src="../ext/jsgrid-1.5.3/jsgrid.min.js"></script>
     <script src="../ext/trumbowyg/dist/trumbowyg.min.js"></script>
+   
+
     <script src="../farmework/js/script.js?v=[@VERSION]"></script>
     <script src="modules/[@MODULE]/js/[@PAGE].js?v=[@VERSION]"></script>
 

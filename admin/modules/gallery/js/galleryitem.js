@@ -1,70 +1,46 @@
-function UploadImage(idimageUpload,tagUpload){
-    var property = document.getElementById(idimageUpload).files[0];
-    var form_data = new FormData();
-    form_data.append("file",property);
-
-    $.ajax({
-        url:'upload.php',
-        method:'POST',
-        data:form_data,
-        contentType:false,
-        cache:false,
-        processData:false,
-        success:function(data){
-            $.ajax({
-                url : 'index.php?p=gallery&m=gallery',
-                type: 'post',
-                data :  {imagemName: data, o : tagUpload}
-            }).done(function(response){ //
-                if(response){
-                    ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
-                }else{
-                    ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
-                }
-            });
-            }
-     });
-}
-
-$(document).ready(function() {  
+$(document).ready(function() {
     $('#DESCSHORT').trumbowyg();
-
-    $('#DESCSHORT').on('tbwblur', function(){ 
-        data = $('#DESCSHORT').trumbowyg('html');
-        var lang_id = $("#lang-change").val();
-        $.ajax({
-            url : 'index.php?p=gallery&m=gallery',
-            type: 'post',
-            data :  {langid: lang_id,textName: data, o : 'updatetext'}
-        }).done(function(response){ //
-            if(response){
-                ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
-            }else{
-                ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
-            }
-        });
-    }); 
-
-    $("#lang-change").change(function() {
-        var lang_id = $("#lang-change").val();
-        $.ajax({
-            url : 'index.php?p=gallery&m=gallery',
-            type: 'post',
-            data :  {langid: lang_id, o : 'changelang'}
-        }).done(function(response){ //
-            if(response){
-                var obj = JSON.parse(response);
-                ShowMessage('Linguagem alterada. Obrigado','info');
-                $('#DESCSHORT').trumbowyg('html',obj[0]['description']);
-            }else{
-                ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
-            }
-        });
-    });
-
-    $("#imageUploadHead").change(function() {
-        if(showImagemUpload(this,600,'imageUploadHead','imagePreviewHead')){
-            UploadImage('imageUploadHead','updateimagehead');
-        }
+    document.getElementById('pro-image').addEventListener('change', readImage, false);
+    
+  //  $( ".preview-images-zone" ).sortable();
+    
+    $(document).on('click', '.image-cancel', function() {
+        let no = $(this).data('no');
+        $(".preview-image.preview-show-"+no).remove();
     });
 });
+
+
+
+var num = 4;
+function readImage() {
+    if (window.File && window.FileList && window.FileReader) {
+        var files = event.target.files; //FileList object
+        var output = $(".preview-images-zone");
+
+        for (let i = 0; i < files.length; i++) {
+            var file = files[i];
+            if (!file.type.match('image')) continue;
+            
+            var picReader = new FileReader();
+            
+            picReader.addEventListener('load', function (event) {
+                var picFile = event.target;
+                var html =  '<div class="preview-image preview-show-' + num + '">' +
+                            '<div class="image-cancel" data-no="' + num + '">x</div>' +
+                            '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' +
+                            
+                            '</div>';
+
+                output.append(html);
+                num = num + 1;
+            });
+
+            picReader.readAsDataURL(file);
+        }
+        $("#pro-image").val('');
+    } else {
+        console.log('Browser not support');
+    }
+}
+
