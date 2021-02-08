@@ -1,0 +1,9 @@
+-------------------------------------2021-02-07 21:02:25 : Code 1 -------------------------------------
+Erro Query: INSERT INTO `tl_gallery_item` (`id_sys_lang`,`id_tl_gallery_item`,`status`) values (2,Array,'INACTIVE'); 
+
+-------------------------------------2021-02-07 21:02:46 : Code 1 -------------------------------------
+Erro Query: INSERT INTO `tl_gallery_item` (`id_sys_lang`,`id_tl_gallery_item`,`status`) values (2,0,'INACTIVE'); 
+
+-------------------------------------2021-02-07 22:02:33 : Code 1 -------------------------------------
+Erro Query: INSERT INTO `tl_gallery_item_lang` (`id_sys_lang`,`id_tl_gallery_item`,`status`) values (1,0,'INACTIVE'); INSERT INTO `tl_gallery_item_lang` (`id_sys_lang`,`id_tl_gallery_item`,`status`) values (2,0,'INACTIVE'); 
+

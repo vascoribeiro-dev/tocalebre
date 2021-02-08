@@ -1,5 +1,7 @@
 $(document).ready(function() {
+    
     $('#DESCSHORT').trumbowyg();
+
     document.getElementById('pro-image').addEventListener('change', readImage, false);
     
   //  $( ".preview-images-zone" ).sortable();
@@ -7,6 +9,29 @@ $(document).ready(function() {
     $(document).on('click', '.image-cancel', function() {
         let no = $(this).data('no');
         $(".preview-image.preview-show-"+no).remove();
+    });
+
+    
+
+
+    $(".saveform").click(function(event){
+        var  userId =$('#userId').val();
+        if(true  ){  // || (parseInt(userId) > 0 ? true : false)
+            var DESCSHORT = $('#DESCSHORT').trumbowyg('html');
+            var titlegallery =$('#titlegallery').val(); 
+            $.ajax({
+                url : 'index.php?p=users&m=users',
+                type: 'post',
+                data :  {imagemName: imagemName, o : (parseInt(userId) > 0 ? 'update' : 'insert') , premiss:JSON.stringify(premiss),useremail:useremail, userId:userId, nameuser : nameuser, username : username,  password : password}
+            }).done(function(response){ //
+                if(response){
+                    ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
+
+                }else{
+                    ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
+                }
+            });
+        }
     });
 });
 

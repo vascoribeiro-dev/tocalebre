@@ -56,7 +56,9 @@
   width: 90px !important;
   height: 90px !important;
 }
-
-.container {
-  padding-top: 50px;
+.lang-change {
+  position: absolute;
+  right: 30px;
+  z-index: 1;
+  top: 60px;
 }

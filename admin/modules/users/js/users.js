@@ -50,8 +50,6 @@ $(document).ready(function() {
                     }
                 });
             });
-
-  
         }
     });
 });
@@ -71,7 +69,9 @@ function ValidateForm(userId){
     }else{
         if($('#password').val() != $('#checkpassword').val()){
             RemoveErroMessageField('#checkpassword');
-            ShowErroMessageField('#checkpassword',"Campo tem que ser igual ao anterior");
+            ShowErroMessageField('#checkpassword',"Passwords tem que ser iguais");
+            ShowErroMessageField('#password',"Passwords tem que ser iguais");
+            findError = true;
         }else{
             RemoveErroMessageField('#password');
             RemoveErroMessageField('#checkpassword');

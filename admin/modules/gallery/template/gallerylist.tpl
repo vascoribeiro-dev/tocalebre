@@ -1,7 +1,7 @@
 
 <div class="row ">
     <div class="col-md-12">
-        <div class="card card-primary"  >
+        <div class="card card-primary" style="overflow-y: auto;height: 1070px;" >
             <div class="card-header">
                 <h3 class="card-title">Imgens</h3>
             </div>
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="col-md-12">
-        <div class="card card-primary"   style="overflow-y: auto;height: 1070px;">
+        <div class="card card-primary"   >
             <div class="card-header">
                 <h3 class="card-title">Textos</h3>
             </div>
@@ -53,4 +53,3 @@
         </div>
     </div>
 </div>
-
