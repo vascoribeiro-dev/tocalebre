@@ -1,54 +1,34 @@
 
-<div class="row ">
-    <div class="col-md-12">
-        <div class="card card-primary" style="overflow-y: auto;height: 1070px;" >
-            <div class="card-header">
-                <h3 class="card-title">Imgens</h3>
+<div class="card">
+    <div class="card-body">
+        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length" ><label>Mostrar<select id="datatableslength" name="example1_length"
+                                aria-controls="example1"
+                                class="custom-select custom-select-sm form-control form-control-sm">
+                                <option value="10" selected >10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select> entries</label></div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div id="example1_filter" class="dataTables_filter"><label>Procurar<input id="searchuser" type="search"
+                                class="form-control form-control-sm" placeholder="" aria-controls="search"></label></div>
+                </div>
             </div>
-            <form role="form">
-                <div class="card-body">
-                    <div class="row ">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label ><h2>Imagem Cabeçalho</h2></label>
-                                    <div class="avatar-upload">
-                                        <div class="avatar-edit">
-                                            <input type='file' id="imageUploadHead" accept=".png, .jpg, .jpeg" />
-                                            <label for="imageUploadHead"><i class="fas fa-pencil-alt"></i>Editar</label>
-                                        </div>
-                                        <div class="avatar-preview">
-                                            <div id="imagePreviewHead" style="background-image: url([@IMAGEHEAD]);">
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
+            <div id="bodymain" class="row">
+                [@TABLE]
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                </div>
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                
                     </div>
                 </div>
-            </form>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="card card-primary"   >
-            <div class="card-header">
-                <h3 class="card-title">Textos</h3>
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <div class="lang-change">
-                        <select class="form-control" name="lang-change" id="lang-change" style="width: 100%">
-                            <option value="1">Português</option>
-                            <option value="2">Inglês</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12">
-                        <form role="form">  
-                         <label ><h2>Descrição</h2></label>               
-                            <textarea id="DESCSHORT" >[@DESCSHORT]</textarea>
-                        </form>
-                    </div>
-                </div>
-        
             </div>
         </div>
     </div>

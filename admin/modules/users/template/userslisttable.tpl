@@ -1,6 +1,6 @@
-              <div class="col-sm-12">
-<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid"
-aria-describedby="example1_info">
+<div class="col-sm-12">
+<table class="table table-bordered table-striped dataTable dtr-inline" role="grid"
+aria-describedby="">
 <thead>
     <tr role="row">
         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
@@ -15,9 +15,9 @@ aria-describedby="example1_info">
         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
             aria-label="Estado: activate to sort column ascending">Estado</th>
         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-            aria-label="CSS grade: activate to sort column ascending">Editar</th>
+            aria-label="">Editar</th>
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-            aria-label="CSS grade: activate to sort column ascending">Remover</th>
+            aria-label="">Remover</th>
     </tr>
 </thead>
 <tbody>
