@@ -80,8 +80,6 @@ if($sessionId){
 $html =  BasicWorks::CreateTemplate('template/index.tpl',$arrayHTML,$m);
 
 }else{
-
-   
     include("modules/login/login.php");
     $arrayHTML['MODULE'] = 'login';
     $arrayHTML['PAGE'] = 'login';

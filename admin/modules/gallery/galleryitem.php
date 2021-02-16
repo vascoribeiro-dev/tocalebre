@@ -3,15 +3,33 @@
    include("DAL/GalleryDAL.php");
    include("class/GalleryItem.php");
    $OrderAjax = BasicWorks::ParameterHelper('o',false,'POST');
-   $galleryId = BasicWorks::ParameterHelper('v',false,'GET');
+   $CLASSGALLERY = BasicWorks::ParameterHelper('CLASSGALLERY',false,'SESSION');
+   $langId = BasicWorks::ParameterHelper('langId',1,'POST');
 
    if($OrderAjax){
       switch($OrderAjax){
-         case 'changelang':
-      
+         case 'update':
+            $title = BasicWorks::ParameterHelper('title',false,'POST');
+            $text = BasicWorks::ParameterHelper('text',false,'POST');
+
+            $galleryItem = unserialize($CLASSGALLERY);
+            $arrayLang = $galleryItem -> GetLang();
+            $arrayLang[$langId]['title'] = $title;
+            $arrayLang[$langId]['text'] = $text;
+            
+            $galleryItem -> PutLang($arrayLang);
+            $_SESSION['CLASSGALLERY'] = serialize($galleryItem);
             exit;
          break;
-
+         case 'changelang':
+            $galleryItem = unserialize($CLASSGALLERY);
+            $arrayLang = $galleryItem -> GetLang();
+            $arrayGetLang['title'] = $arrayLang[$langId]['title'];
+            $arrayGetLang['text'] = $arrayLang[$langId]['text'];
+            $getLangJSON = json_encode($arrayGetLang);
+            echo $getLangJSON;
+            exit;
+         break;
       }
    }
 
@@ -20,14 +38,17 @@
    $arrayHTML['TITLEGALLARY'] = '';
    $arrayHTML['DESCSHORT'] = '';
 
-   if($galleryId){
-      $galleryItem = new GalleryItem($galleryId);
-      $arrayHTML['TITLEGALLARY'] = $arrayLang[1]['text'];
-      $arrayHTML['DESCSHORT'] = $arrayLang[1]['title'];
-      $arrayHTML['GALLERYID'] = $galleryId;
+   if($CLASSGALLERY){
+    $galleryItem =  unserialize($CLASSGALLERY);
+       $arrayLang = $galleryItem -> GetLang();
+      $arrayHTML['TITLEGALLARY'] = $arrayLang[$langId]['title'];
+      $arrayHTML['DESCSHORT'] = $arrayLang[$langId]['text'];
+    //$arrayHTML['GALLERYID'] = $galleryId;
    }else{
       $galleryItem = new GalleryItem(-1);
-      $_SESSION['CLASSGALLERY'] = $galleryItem;
+      $_SESSION['CLASSGALLERY'] = serialize($galleryItem);
+      $arrayHTML['TITLEGALLARY'] =  "";
+      $arrayHTML['DESCSHORT'] = "";
       $arrayHTML['GALLERYID'] = -1;
    }
 

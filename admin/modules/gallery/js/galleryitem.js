@@ -1,7 +1,5 @@
-$(document).ready(function() {
-    
+$(document).ready(function() {  
     $('#DESCSHORT').trumbowyg();
-
     document.getElementById('pro-image').addEventListener('change', readImage, false);
     
   //  $( ".preview-images-zone" ).sortable();
@@ -10,9 +8,6 @@ $(document).ready(function() {
         let no = $(this).data('no');
         $(".preview-image.preview-show-"+no).remove();
     });
-
-    
-
 
     $(".saveform").click(function(event){
         var  userId =$('#userId').val();
@@ -32,6 +27,57 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+
+    $("#titlegallery").blur(function() {
+        var titleGallery =$('#titlegallery').val(); 
+        var texthtml = $('#DESCSHORT').trumbowyg('html');
+        var langId =$('#lang-change').val(); 
+        $.ajax({
+            url : 'index.php?p=galleryitem&m=gallery',
+            type: 'post',
+            data :  {o : 'update',langId: langId, title : titleGallery, text : texthtml}
+        }).done(function(response){ //
+            if(response){
+                ShowMessage('Alterado com Sucesso. Obrigado','success');
+            }else{
+                ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
+            }
+        });
+    });
+    $('#DESCSHORT').on('tbwblur', function(){ 
+        var titleGallery =$('#titlegallery').val(); 
+        var texthtml = $('#DESCSHORT').trumbowyg('html');
+        var langId =$('#lang-change').val(); 
+        $.ajax({
+            url : 'index.php?p=galleryitem&m=gallery',
+            type: 'post',
+            data :  {o : 'update',langId: langId, title : titleGallery, text : texthtml}
+        }).done(function(response){ //
+            if(response){
+                ShowMessage('Alterado com Sucesso. Obrigado','success');
+            }else{
+                ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
+            }
+        });
+    }); 
+
+    $("#lang-change").change(function() {
+        var langId = $("#lang-change").val();
+        $.ajax({
+            url : 'index.php?p=galleryitem&m=gallery',
+            type: 'post',
+            data :  {langId: langId, o : 'changelang'}
+        }).done(function(response){ //
+            if(response){
+                var obj = JSON.parse(response);
+                ShowMessage('Linguagem alterada. Obrigado','info');
+                $('#DESCSHORT').trumbowyg('html',obj['text']);
+                $('#titlegallery').val(obj['title']);
+            }else{
+                ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
+            }
+        });
     });
 });
 

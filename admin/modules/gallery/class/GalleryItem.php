@@ -22,11 +22,11 @@ class GalleryItem {
     }
 
 
-    function GetLang(){
+    public function GetLang(){
         return $this->GalleryItemLang;
     }
 
-    function GetImage(){
+    public function GetImage(){
         return $this->GalleryItemImagem;
     }
 
