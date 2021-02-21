@@ -95,8 +95,9 @@ class BasicWorks {
           $result = $default;
         break;  
       }
-      return $result;
+      return  preg_replace("/\s\s+/","",$result);
   }     
+  
   public static function monthExtense($month){
     switch($month){
       case '1':

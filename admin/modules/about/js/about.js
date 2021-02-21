@@ -4,7 +4,7 @@ function UploadImage(idimageUpload,tagUpload){
     form_data.append("file",property);
 
     $.ajax({
-        url:'upload.php',
+        url:'index.php?p=about&m=about&o=update',
         method:'POST',
         data:form_data,
         contentType:false,

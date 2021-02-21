@@ -2,12 +2,12 @@
 class AboutDAL {
     public static function UpdateImage($image,$field){
         $sqlExec = "update tl_about set  ".$field." = '".$image."' where `id` = 1 ";
-        return DataBase::ExecuteQuery($sqlExec);
+        return DataBase::ExecuteQuery($sqlExec,"Update");
     }
 
     public static function UpdateText($text,$id_lang,$field){
         $sqlExec = "update tl_about_lang set  ".$field." = '".$text."' where `id_tl_about` = 1 and  `id_sys_lang` = ".$id_lang;
-        return DataBase::ExecuteQuery($sqlExec);
+        return DataBase::ExecuteQuery($sqlExec,"Update");
     }
 
     public static function SelectAbout($id_lang){

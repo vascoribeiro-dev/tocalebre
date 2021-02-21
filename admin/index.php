@@ -9,12 +9,12 @@ include("../farmework/BasicWorks.php");
 include("../farmework/ArrayHelp.php");
 include("../farmework/Menu.php");
 include("../farmework/LogHelp.php");
+include("../farmework/Update.php");
 
 $currentDate = date('Y-m-d');
 $currentDateTime = date('Y-m-d H:m:s');
 $currentMonth = date("m",strtotime($currentDate));
 $currentYear =  date("Y",strtotime($currentDate));
-
 
 define("CURRENTMONTH", intval($currentMonth));
 define("CURRENTYEAR", $currentYear);
@@ -30,10 +30,12 @@ if($post == 'login'){
     echo BasicWorks::login($login, $password);
     exit;
 }
+
 if($post == 'logout'){
     BasicWorks::logout();
     exit;
 }
+
 $m = BasicWorks::ParameterHelper('m',false,'GET');
 $p = BasicWorks::ParameterHelper('p',false,'GET');
 $sessionId = BasicWorks::ParameterHelper('id',false,'SESSION');
@@ -59,9 +61,10 @@ if($sessionId){
     }
     $company .= ' </select>';
     if(BasicWorks::GetPrimission($sessionId,$p,$m)){
-      
+        define("PATHIMAGE", "modules/".$m."/"."images/");
         include("modules/".$m."/".$p.".php");
-    
+      
+
         $arrayHTML['MODULE'] = $m;
         $arrayHTML['PAGE'] = $p;
         $arrayHTML['MENU'] = Menu::GetMenu($m,$p,$sessionId);
@@ -72,7 +75,7 @@ if($sessionId){
         $arrayHTML['USERPHOTO'] = $sessionPhoto;
     }else{
         $arrayHTML['MENU'] = Menu::GetMenu($m,$p,$sessionId);
-        $arrayHTML['TITLE']  = 'TOCA DA LEBRE ';
+        $arrayHTML['TITLE']  = 'TOCA DA LEBRE';
         $arrayHTML['COMPANY']  = $company;
         $arrayHTML['USERNAME'] = $sessionName; 
         $arrayHTML['USERPHOTO'] = $sessionPhoto;

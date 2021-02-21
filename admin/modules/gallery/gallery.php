@@ -1,7 +1,7 @@
 
 <?php
    include("DAL/GalleryDAL.php");
-   $OrderAjax = BasicWorks::ParameterHelper('o',false,'POST');
+   $OrderAjax = BasicWorks::ParameterHelper('o',false,'GETorPOST');
 
    $title = 'Galeria';
 
@@ -9,14 +9,20 @@
       switch($OrderAjax){
          case 'changelang':
             $langid = BasicWorks::ParameterHelper('langid',false,'POST');
-            $arrayAbout =  GalleryDAL::SelectContact($langid);
+            $arrayAbout =  GalleryDAL::SelectGallery($langid);
              $AboutJSON=json_encode($arrayAbout);
             echo $AboutJSON;
             exit;
          break;
          case 'updateimagehead':
-            $imageHead = BasicWorks::ParameterHelper('imagemName',false,'POST');
-            GalleryDAL::UpdateImage($imageHead,"image_head");
+            $imagemName = BasicWorks::ParameterHelper('imagemName',false,'POST');
+            $arrayGallery =  GalleryDAL::SelectGallery(1);
+            if(Update::MoveFileTo($imagemName,PATHIMAGE)){
+               GalleryDAL::UpdateImage($imagemName,"image_head");
+               if($arrayGallery){
+                  Update::DeleteFile($arrayGallery[0]["image_head"],PATHIMAGE);
+               }
+            }
             exit;
          break;
          case 'updatetext':
@@ -25,13 +31,18 @@
             GalleryDAL::UpdateText($text,$langid,'description');
             exit;
          break;
+         case 'update':
+            $nameImagem = Update::UpdateTMP($_FILES['file']);
+            echo $nameImagem;
+            exit;
+         break;
       }
    }
 
-   $arrayAbout =  GalleryDAL::SelectContact(1);
+   $arrayGallery =  GalleryDAL::SelectGallery(1);
 
-   $arrayHTML['IMAGEHEAD'] =  $arrayAbout[0]["image_head"];
-   $arrayHTML['DESCSHORT'] = $arrayAbout[0]["description"];
+   $arrayHTML['IMAGEHEAD'] =  PATHIMAGE.$arrayGallery[0]["image_head"];
+   $arrayHTML['DESCSHORT'] = $arrayGallery[0]["description"];
 
 
 
