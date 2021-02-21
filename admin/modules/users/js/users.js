@@ -27,7 +27,7 @@ $(document).ready(function() {
             form_data.append("file",property);
 
             $.ajax({
-                url:'upload.php',
+                url:'index.php?p=users&m=users&o=updateimage',
                 method:'POST',
                 data:form_data,
                 contentType:false,

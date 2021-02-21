@@ -1,7 +1,7 @@
 
 <?php
    include("DAL/UserDAL.php");
-   $OrderAjax = BasicWorks::ParameterHelper('o',false,'POST');
+   $OrderAjax = BasicWorks::ParameterHelper('o',false,'GETorPOST');
    $userid = BasicWorks::ParameterHelper('v',false,'GET');
    $arrayHTML['USERID'] = 0;
    $title = 'Criar Novo Utilizador';
@@ -43,15 +43,16 @@
 
       switch($OrderAjax){
          case 'insert':
-            $userid = UserDAL::InsertUser($name,$userName,$password,$useremail,$imagemName);
-            foreach($premiss as $value){
-               $arrayPageUser = explode("_",$value[1]);
-               UserDAL::InsertUserPermissions($userid,$arrayPageUser[0],$value[0]);
+            if(Update::MoveFileTo($imagemName,PATHIMAGE)){
+               $userid = UserDAL::InsertUser($name,$userName,$password,$useremail,$imagemName);
+               foreach($premiss as $value){
+                  $arrayPageUser = explode("_",$value[1]);
+                  UserDAL::InsertUserPermissions($userid,$arrayPageUser[0],$value[0]);
+               }
             }
             exit;
          break;
          case 'update':
-
             $values = array(
                "name" => $name,
                "username" => $userName,
@@ -59,6 +60,15 @@
                "avatarphoto" => $imagemName
             );
 
+            $arrayWhere = array(
+               "id" => " = ".$userid
+            );
+
+            $arrayUser =  UserDAL::SelectUser($arrayWhere);
+
+            if(Update::MoveFileTo($imagemName,PATHIMAGE)){
+               Update::DeleteFile($arrayUser[0]["avatarphoto"],PATHIMAGE);
+            }
 
             if($password){
                $password = BasicWorks::PasswordHash($password);
@@ -76,6 +86,11 @@
             }
             exit;
          break;
+         case 'updateimage':
+            $nameImagem = Update::UpdateTMP($_FILES['file']);
+            echo $nameImagem;
+            exit;
+         break;
       }
    }
 
@@ -88,7 +103,7 @@
      $arrayHTML['USER_NAME'] =  $arrayUser[0]["name"] ;
      $arrayHTML['USER_NICKNAME'] = $arrayUser[0]["username"] ;
      $arrayHTML['USER_MAIL'] = $arrayUser[0]["email"] ;
-     $arrayHTML['AVATARPHOTO'] = $arrayUser[0]["avatarphoto"];
+     $arrayHTML['AVATARPHOTO'] = PATHIMAGE.$arrayUser[0]["avatarphoto"];
      $arrayHTML['USERID'] = $userid;
 
    }
