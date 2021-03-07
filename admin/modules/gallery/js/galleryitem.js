@@ -36,7 +36,7 @@ $(document).ready(function() {
         $.ajax({
             url : 'index.php?p=galleryitem&m=gallery',
             type: 'post',
-            data :  {o : 'update',langId: langId, title : titleGallery, text : texthtml}
+            data :  {o : 'updateclass',langId: langId, title : titleGallery, text : texthtml}
         }).done(function(response){ //
             if(response){
                 ShowMessage('Alterado com Sucesso. Obrigado','success');
@@ -52,7 +52,7 @@ $(document).ready(function() {
         $.ajax({
             url : 'index.php?p=galleryitem&m=gallery',
             type: 'post',
-            data :  {o : 'update',langId: langId, title : titleGallery, text : texthtml}
+            data :  {o : 'updateclass',langId: langId, title : titleGallery, text : texthtml}
         }).done(function(response){ //
             if(response){
                 ShowMessage('Alterado com Sucesso. Obrigado','success');
@@ -83,35 +83,41 @@ $(document).ready(function() {
 
 
 
-var num = 4;
+var num = 0;
 function readImage() {
-    if (window.File && window.FileList && window.FileReader) {
-        var files = event.target.files; //FileList object
-        var output = $(".preview-images-zone");
+       UploadImage('pro-image','updateimage','gallery','galleryitem',0);
 
-        for (let i = 0; i < files.length; i++) {
-            var file = files[i];
-            if (!file.type.match('image')) continue;
-            
-            var picReader = new FileReader();
-            
-            picReader.addEventListener('load', function (event) {
-                var picFile = event.target;
-                var html =  '<div class="preview-image preview-show-' + num + '">' +
-                            '<div class="image-cancel" data-no="' + num + '">x</div>' +
-                            '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' +
-                            
-                            '</div>';
+           
 
-                output.append(html);
-                num = num + 1;
-            });
+        if (window.File && window.FileList && window.FileReader) {
+            var files = event.target.files; //FileList object
+            var output = $(".preview-images-zone");
 
-            picReader.readAsDataURL(file);
+            for (let i = 0; i < files.length; i++) {
+                var file = files[i];
+                if (!file.type.match('image')) continue;
+                
+                var picReader = new FileReader();
+                
+                picReader.addEventListener('load', function (event) {
+                    var picFile = event.target;
+                    var html =  '<div class="preview-image preview-show-' + num + '">' +
+                                '<div class="image-cancel" data-no="' + num + '">x</div>' +
+                                '<div class="image-zone"><img id="pro-img-' + num + '" data-name='+nameimage+' src="' + picFile.result + '"></div>' +
+                                
+                                '</div>';
+
+                    output.append(html);
+
+                
+                    num = num + 1;
+                });
+
+                picReader.readAsDataURL(file);
+            }
+            $("#pro-image").val('');
+        } else {
+            console.log('Browser not support');
         }
-        $("#pro-image").val('');
-    } else {
-        console.log('Browser not support');
-    }
 }
 

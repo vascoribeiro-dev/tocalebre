@@ -2,13 +2,17 @@
 <?php
    include("DAL/GalleryDAL.php");
    include("class/GalleryItem.php");
-   $OrderAjax = BasicWorks::ParameterHelper('o',false,'POST');
+   $OrderAjax = BasicWorks::ParameterHelper('o',false,'GETorPOST');
    $CLASSGALLERY = BasicWorks::ParameterHelper('CLASSGALLERY',false,'SESSION');
    $langId = BasicWorks::ParameterHelper('langId',1,'POST');
 
    if($OrderAjax){
       switch($OrderAjax){
-         case 'update':
+         case 'updateimage':
+     
+            exit;
+         break; 
+         case 'updateclass':
             $title = BasicWorks::ParameterHelper('title',false,'POST');
             $text = BasicWorks::ParameterHelper('text',false,'POST');
 
@@ -28,6 +32,11 @@
             $arrayGetLang['text'] = $arrayLang[$langId]['text'];
             $getLangJSON = json_encode($arrayGetLang);
             echo $getLangJSON;
+            exit;
+         break;
+         case 'update':
+            $nameImagem = Update::UpdateTMP($_FILES['file']);
+            echo $nameImagem;
             exit;
          break;
       }

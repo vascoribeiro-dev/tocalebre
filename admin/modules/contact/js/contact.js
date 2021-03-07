@@ -1,30 +1,3 @@
-function UploadImage(idimageUpload,tagUpload){
-    var property = document.getElementById(idimageUpload).files[0];
-    var form_data = new FormData();
-    form_data.append("file",property);
-
-    $.ajax({
-        url:'index.php?p=contact&m=contact&o=update',
-        method:'POST',
-        data:form_data,
-        contentType:false,
-        cache:false,
-        processData:false,
-        success:function(data){
-            $.ajax({
-                url : 'index.php?p=contact&m=contact',
-                type: 'post',
-                data :  {imagemName: data, o : tagUpload}
-            }).done(function(response){ //
-                if(response){
-                    ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
-                }else{
-                    ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
-                }
-            });
-            }
-     });
-}
 
 $(document).ready(function() {  
     $('#DESCLONG').trumbowyg();
@@ -80,14 +53,14 @@ $(document).ready(function() {
     });
 
     $("#imageUploadHead").change(function() {
-        if(showImagemUpload(this,600,'imageUploadHead','imagePreviewHead')){
-            UploadImage('imageUploadHead','updateimagehead');
+        if(showImagemUpload(this,600,'imageUploadHead','imagePreviewHead','contact','contact')){
+            UploadImage('imageUploadHead','updateimagehead',0);
         }
     });
 
     $("#imageUpload1").change(function() {
-        if(showImagemUpload(this,600,'imageUpload1','imagePreview1')){
-            UploadImage('imageUpload1','updateimage1');
+        if(showImagemUpload(this,600,'imageUpload1','imagePreview1','contact','contact')){
+            UploadImage('imageUpload1','updateimage1',0);
         }
      });
 

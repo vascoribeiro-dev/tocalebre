@@ -121,3 +121,31 @@ function showImagemUpload(input,imgSizeStand, idelement,idShowImage){
             }
         }
 }
+
+
+function UploadImage(idimageUpload,tagUpload,module,page,num){
+    var property = document.getElementById(idimageUpload).files[0];
+    var form_data = new FormData();
+    form_data.append("file",property);
+    $.ajax({
+        url:'index.php?p='+page+'&m='+module+'&o=update',
+        method:'POST',
+        data:form_data,
+        contentType:false,
+        cache:false,
+        processData:false,
+        success:function(result){
+            $.ajax({
+                url : 'index.php?p='+page+'&m='+module,
+                type: 'post',
+                data :  {imagemName: result, o : tagUpload}
+            }).done(function(response){ //
+                if(response){
+                    ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
+                }else{
+                    ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
+                }
+            });
+        }
+     });
+}

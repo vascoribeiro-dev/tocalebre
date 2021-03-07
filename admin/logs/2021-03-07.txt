@@ -1,0 +1,9 @@
+-------------------------------------2021-03-07 20:03:26 : Code 1 -------------------------------------
+Erro Query: INSERT `tl_blog` (`image`,`date`) VALUES ('imagesTMP/191222087.jpg','2021-03-07 20:03:26');
+
+-------------------------------------2021-03-07 20:03:26 : Code 1 -------------------------------------
+Erro Query: INSERT `tl_blog_lang` (`id_tl_blog`,`id_sys_lang`,`text`,`title`) VALUES (,1,'<p>Vasco come peixe</p>','Vasco vai comer peixe 2');
+
+-------------------------------------2021-03-07 20:03:26 : Code 1 -------------------------------------
+Erro Query: INSERT `tl_blog_lang` (`id_tl_blog`,`id_sys_lang`,`text`,`title`) VALUES (,2,'<p>Vasco eat fish evertime</p>','Vasco eat fish');
+
