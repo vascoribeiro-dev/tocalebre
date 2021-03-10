@@ -10,6 +10,7 @@ $(document).ready(function() {
             }).done(function(response){ //
                 if(response){
                     ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
+                    window.location.replace('index.php?p=bloglist&m=blog');
                 }else{
                     ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
                 }
@@ -84,7 +85,7 @@ $(document).ready(function() {
                     if(result){
                      
                         ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
-                        window.location.replace('index.php?p=bloglist&m=blog');
+            
                     }else{
                         ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
                     }

@@ -10,7 +10,7 @@
                     <div class="row ">
                         <div class="col-md-12">
                             <div class="form-group">
-                            <label ><h2>Imagem Cabeçalho</h2></label>
+                            <label ><h2>Imagem do Blog</h2></label>
                                 <div class="avatar-upload">
                                     <div class="avatar-edit">
                                         <input type='file' id="imageUploadHead" accept=".png, .jpg, .jpeg" />

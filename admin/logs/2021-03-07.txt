@@ -7,3 +7,8 @@ Erro Query: INSERT `tl_blog_lang` (`id_tl_blog`,`id_sys_lang`,`text`,`title`) VA
 -------------------------------------2021-03-07 20:03:26 : Code 1 -------------------------------------
 Erro Query: INSERT `tl_blog_lang` (`id_tl_blog`,`id_sys_lang`,`text`,`title`) VALUES (,2,'<p>Vasco eat fish evertime</p>','Vasco eat fish');
 
+-------------------------------------2021-03-07 21:03:58 : Code 1 -------------------------------------
+Erro Query: SELECT a.id,a.date, a.`image`  ,al.`text`  ,al.`title`, a.s`status`    FROM `tl_blogs` a
+        inner join  `tl_blog_lang` al on   a.`id` = al.`id_tl_blog`
+        WHERE al.`id_sys_lang` =  1 
+

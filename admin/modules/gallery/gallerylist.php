@@ -14,10 +14,9 @@
          break;
       }
    }
+
    $rowsGallery = array();
    $table =  GalleryList::CreateTableGallery($rowsGallery);
    $arrayHTML['TABLE'] = $table ;
    $body =  BasicWorks::CreateTemplate('modules/gallery/template/gallerylist.tpl',$arrayHTML);
-
-
 ?>
