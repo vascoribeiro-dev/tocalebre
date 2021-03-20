@@ -53,14 +53,14 @@ $(document).ready(function() {
     });
 
     $("#imageUploadHead").change(function() {
-        if(showImagemUpload(this,600,'imageUploadHead','imagePreviewHead','contact','contact')){
-            UploadImage('imageUploadHead','updateimagehead',0);
+        if(showImagemUpload(this,600,'imageUploadHead','imagePreviewHead')){
+            UploadImage('imageUploadHead','updateimagehead','contact','contact');
         }
     });
 
     $("#imageUpload1").change(function() {
-        if(showImagemUpload(this,600,'imageUpload1','imagePreview1','contact','contact')){
-            UploadImage('imageUpload1','updateimage1',0);
+        if(showImagemUpload(this,600,'imageUpload1','imagePreview1')){
+            UploadImage('imageUpload1','updateimage1','contact','contact');
         }
      });
 

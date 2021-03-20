@@ -18,7 +18,9 @@
             $imageHead = BasicWorks::ParameterHelper('imagemName',false,'POST');
             $arrayContact = ContactDAL::SelectContact(1);
             if(Update::MoveFileTo($imageHead,PATHIMAGE)){
-               ContactDAL::UpdateImage($imageHead,"image_head");
+               $file = str_replace("imagesTMP/", "", $imageHead);
+               $locationDestiny = PATHIMAGE.$file;
+               ContactDAL::UpdateImage($locationDestiny,"image_head");
                if($arrayContact){
                   Update::DeleteFile($arrayContact[0]["image_head"],PATHIMAGE);
                }
@@ -29,7 +31,9 @@
             $imageBody = BasicWorks::ParameterHelper('imagemName',false,'POST');
             ContactDAL::UpdateImage($imageBody,"image_body");
             if(Update::MoveFileTo($imageBody,PATHIMAGE)){
-               ContactDAL::UpdateImage($imageBody,"image_body");
+               $file = str_replace("imagesTMP/", "", $imageBody);
+               $locationDestiny = PATHIMAGE.$file;
+               ContactDAL::UpdateImage($locationDestiny,"image_body");
                if($arrayContact){
                   Update::DeleteFile($arrayContact[0]["image_body"],PATHIMAGE);
                }
@@ -58,8 +62,8 @@
 
    $arrayContact =  ContactDAL::SelectContact(1);
 
-   $arrayHTML['IMAGEHEAD'] =  PATHIMAGE.$arrayContact[0]["image_head"];
-   $arrayHTML['IMAGEM1'] = PATHIMAGE.$arrayContact[0]["image_body"] ;
+   $arrayHTML['IMAGEHEAD'] =  $arrayContact[0]["image_head"];
+   $arrayHTML['IMAGEM1'] = $arrayContact[0]["image_body"] ;
    $arrayHTML['DESCSHORT'] = $arrayContact[0]["description_short"];
    $arrayHTML['DESCLONG'] = $arrayContact[0]["description_long"];
 

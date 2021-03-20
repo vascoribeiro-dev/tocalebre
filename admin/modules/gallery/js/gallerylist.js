@@ -1,70 +1,52 @@
-function UploadImage(idimageUpload,tagUpload){
-    var property = document.getElementById(idimageUpload).files[0];
-    var form_data = new FormData();
-    form_data.append("file",property);
+function DeleteUser(idgalleryitem){
 
+    namesearch = $('#searchuser').val(); 
+    datatableslength = $('#datatableslength').val(); 
     $.ajax({
-        url:'upload.php',
-        method:'POST',
-        data:form_data,
-        contentType:false,
-        cache:false,
-        processData:false,
-        success:function(data){
-            $.ajax({
-                url : 'index.php?p=gallery&m=gallery',
-                type: 'post',
-                data :  {imagemName: data, o : tagUpload}
-            }).done(function(response){ //
-                if(response){
-                    ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
-                }else{
-                    ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
-                }
-            });
-            }
-     });
+        url : 'index.php?p=gallerylist&m=gallery',
+        type: 'post',
+        data : {o : 'delete', idgalleryitem : idgalleryitem, namesearch : namesearch, datatableslength : datatableslength}
+    }).done(function(response){ //
+        $( "#bodymain" ).html(response);
+        ShowMessage('Registo removido com sucesso.', 'success') 
+    });
 }
 
-$(document).ready(function() {  
-    $('#DESCSHORT').trumbowyg();
-
-    $('#DESCSHORT').on('tbwblur', function(){ 
-        data = $('#DESCSHORT').trumbowyg('html');
-        var lang_id = $("#lang-change").val();
-        $.ajax({
-            url : 'index.php?p=gallery&m=gallery',
-            type: 'post',
-            data :  {langid: lang_id,textName: data, o : 'updatetext'}
-        }).done(function(response){ //
-            if(response){
-                ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
-            }else{
-                ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
-            }
-        });
-    }); 
-
-    $("#lang-change").change(function() {
-        var lang_id = $("#lang-change").val();
-        $.ajax({
-            url : 'index.php?p=gallery&m=gallery',
-            type: 'post',
-            data :  {langid: lang_id, o : 'changelang'}
-        }).done(function(response){ //
-            if(response){
-                var obj = JSON.parse(response);
-                ShowMessage('Linguagem alterada. Obrigado','info');
-                $('#DESCSHORT').trumbowyg('html',obj[0]['description']);
-            }else{
-                ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
-            }
-        });
+function searchUser(){
+    namesearch = $('#searchuser').val(); 
+    datatableslength = $('#datatableslength').val(); 
+    $.ajax({
+        url : 'index.php?p=gallerylist&m=gallery',
+        type: 'post',
+        data : {o : 'search', namesearch : namesearch, datatableslength : datatableslength}
+    }).done(function(response){ //
+        $( "#bodymain" ).html(response);
     });
+}
 
-    $("#imageUploadHead").change(function() {
-        if(showImagemUpload(this,600,'imageUploadHead','imagePreviewHead')){
-            UploadImage('imageUploadHead','updateimagehead');
-        }
+function EditarUser(idgalleryitem){
+    window.location.replace('index.php?p=galleryitem&m=gallery&v='+idgalleryitem);
+}
+
+function ChangeStatusUsers(idgalleryitem,statusgalleryitem){
+    namesearch = $('#searchuser').val(); 
+    datatableslength = $('#datatableslength').val(); 
+    $.ajax({
+        url : 'index.php?p=gallerylist&m=gallery',
+        type: 'post',
+        data : {o : 'statusChange', idgalleryitem : idgalleryitem, statusgalleryitem : statusgalleryitem, namesearch : namesearch, datatableslength : datatableslength}
+    }).done(function(response){ //
+        $( "#bodymain" ).html(response);
+        ShowMessage('Estado alterado com sucesso.', 'success') 
+    });
+}
+
+
+$(document).ready(function() {
+    $("#searchuser").on("keyup", function() {
+        searchUser();
+    });
+    $("#datatableslength").on("change", function() {
+        searchUser();
     });
 });

@@ -1,0 +1,6 @@
+-------------------------------------2021-03-15 22:03:21 : Code 1 -------------------------------------
+Erro Query: SELECT a.id,al.`text`,al.`title`, a.`status` al.id_sys_lang
+        FROM `tl_gallery_items` a
+        inner join  `tl_gallery_item_lang` al on   a.`id` = al.`id_tl_gallery_item`
+         WHERE  a.id = 1
+

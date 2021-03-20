@@ -38,7 +38,7 @@ $(document).ready(function() {
 
     $("#imageUploadHead").change(function() {
         if(showImagemUpload(this,600,'imageUploadHead','imagePreviewHead')){
-            UploadImage('imageUploadHead','updateimagehead','gallery','gallery',0);
+            UploadImage('imageUploadHead','updateimagehead','gallery','gallery');
         }
     });
 });

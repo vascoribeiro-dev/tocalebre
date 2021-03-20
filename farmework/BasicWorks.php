@@ -11,7 +11,7 @@ class BasicWorks {
       if(password_verify($password,$result[0]['password'])){
         $_SESSION['id'] = $result[0]['id'];
         $_SESSION['name'] = $result[0]['name'];
-        $_SESSION['photo'] = "modules/users/images/".$result[0]['avatarphoto'];
+        $_SESSION['photo'] = $result[0]['avatarphoto'];
        //$_SESSION['primission'] = BasicWorks::GetPrimission($result[0]['id']);
         /*if(empty($_SESSION['company'])){
           $arraycompany = BasicWorks::GetCompany($result[0]['id']);

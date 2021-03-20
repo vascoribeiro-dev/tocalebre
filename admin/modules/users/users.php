@@ -44,6 +44,8 @@
       switch($OrderAjax){
          case 'insert':
             if(Update::MoveFileTo($imagemName,PATHIMAGE)){
+               $file = str_replace("imagesTMP/", "", $imagemName);
+               $imagemName = PATHIMAGE.$file;
                $userid = UserDAL::InsertUser($name,$userName,$password,$useremail,$imagemName);
                foreach($premiss as $value){
                   $arrayPageUser = explode("_",$value[1]);
@@ -70,6 +72,11 @@
                Update::DeleteFile($arrayUser[0]["avatarphoto"],PATHIMAGE);
             }
 
+            $file = str_replace("imagesTMP/", "", $imagemName);
+            $imagemName = PATHIMAGE.$file;
+
+            $values["avatarphoto"] = $imagemName;
+
             if($password){
                $password = BasicWorks::PasswordHash($password);
                $values['password'] = $password; 
@@ -87,8 +94,9 @@
             exit;
          break;
          case 'updateimage':
-            $nameImagem = Update::UpdateTMP($_FILES['file']);
-            echo $nameImagem;
+               $nameImagem = Update::UpdateTMP($_FILES['file']);
+               echo $nameImagem;
+         
             exit;
          break;
       }
@@ -103,7 +111,7 @@
      $arrayHTML['USER_NAME'] =  $arrayUser[0]["name"] ;
      $arrayHTML['USER_NICKNAME'] = $arrayUser[0]["username"] ;
      $arrayHTML['USER_MAIL'] = $arrayUser[0]["email"] ;
-     $arrayHTML['AVATARPHOTO'] = PATHIMAGE.$arrayUser[0]["avatarphoto"];
+     $arrayHTML['AVATARPHOTO'] = $arrayUser[0]["avatarphoto"];
      $arrayHTML['USERID'] = $userid;
 
    }

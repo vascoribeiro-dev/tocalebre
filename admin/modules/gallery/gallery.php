@@ -18,7 +18,9 @@
             $imagemName = BasicWorks::ParameterHelper('imagemName',false,'POST');
             $arrayGallery =  GalleryDAL::SelectGallery(1);
             if(Update::MoveFileTo($imagemName,PATHIMAGE)){
-               GalleryDAL::UpdateImage($imagemName,"image_head");
+               $file = str_replace("imagesTMP/", "", $imagemName);
+               $locationDestiny = PATHIMAGE.$file;
+               GalleryDAL::UpdateImage($locationDestiny,"image_head");
                if($arrayGallery){
                   Update::DeleteFile($arrayGallery[0]["image_head"],PATHIMAGE);
                }
@@ -41,7 +43,7 @@
 
    $arrayGallery =  GalleryDAL::SelectGallery(1);
 
-   $arrayHTML['IMAGEHEAD'] =  PATHIMAGE.$arrayGallery[0]["image_head"];
+   $arrayHTML['IMAGEHEAD'] = $arrayGallery[0]["image_head"];
    $arrayHTML['DESCSHORT'] = $arrayGallery[0]["description"];
 
 

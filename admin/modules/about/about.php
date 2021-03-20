@@ -18,7 +18,9 @@
             $imageHead = BasicWorks::ParameterHelper('imagemName',false,'POST');
             $arrayAbout =  AboutDAL::SelectAbout(1);
             if(Update::MoveFileTo($imageHead,PATHIMAGE)){
-               AboutDAL::UpdateImage($imageHead,"image_head");
+               $file = str_replace("imagesTMP/", "", $imageHead);
+               $locationDestiny = PATHIMAGE.$file;
+               AboutDAL::UpdateImage($locationDestiny,"image_head");
                if($arrayAbout){
                   Update::DeleteFile($arrayAbout[0]["image_head"],PATHIMAGE);
                }
@@ -29,7 +31,9 @@
             $image1 = BasicWorks::ParameterHelper('imagemName',false,'POST');
             $arrayAbout =  AboutDAL::SelectAbout(1);
             if(Update::MoveFileTo($image1,PATHIMAGE)){
-               AboutDAL::UpdateImage($image1,"image_1");
+               $file = str_replace("imagesTMP/", "", $image1);
+               $locationDestiny = PATHIMAGE.$file;
+               AboutDAL::UpdateImage($locationDestiny,"image_1");
                if($arrayAbout){
                   Update::DeleteFile($arrayAbout[0]["image_1"],PATHIMAGE);
                }
@@ -39,9 +43,12 @@
          case 'updateimage2':
             
             $image2 = BasicWorks::ParameterHelper('imagemName',false,'POST');
+            echo  $image2;
             $arrayAbout =  AboutDAL::SelectAbout(1);
             if(Update::MoveFileTo($image2,PATHIMAGE)){
-               AboutDAL::UpdateImage($image2,"image_2");
+               $file = str_replace("imagesTMP/", "", $image2);
+               $locationDestiny = PATHIMAGE.$file;
+               AboutDAL::UpdateImage($locationDestiny,"image_2");
                if($arrayAbout){
                   Update::DeleteFile($arrayAbout[0]["image_2"],PATHIMAGE);
                }
@@ -52,7 +59,9 @@
             $image3 = BasicWorks::ParameterHelper('imagemName',false,'POST');
             $arrayAbout =  AboutDAL::SelectAbout(1);
             if(Update::MoveFileTo($image3,PATHIMAGE)){
-               AboutDAL::UpdateImage($image3,"image_3");
+               $file = str_replace("imagesTMP/", "", $image3);
+               $locationDestiny = PATHIMAGE.$file;
+               AboutDAL::UpdateImage($locationDestiny,"image_3");
                if($arrayAbout){
                   Update::DeleteFile($arrayAbout[0]["image_3"],PATHIMAGE);
                }
@@ -81,10 +90,10 @@
 
    $arrayAbout =  AboutDAL::SelectAbout(1);
 
-   $arrayHTML['IMAGEHEAD'] =  PATHIMAGE.$arrayAbout[0]["image_head"];
-   $arrayHTML['IMAGEM1'] = PATHIMAGE.$arrayAbout[0]["image_1"] ;
-   $arrayHTML['IMAGEM2'] = PATHIMAGE.$arrayAbout[0]["image_2"] ;
-   $arrayHTML['IMAGEM3'] = PATHIMAGE.$arrayAbout[0]["image_3"] ;
+   $arrayHTML['IMAGEHEAD'] =  $arrayAbout[0]["image_head"];
+   $arrayHTML['IMAGEM1'] = $arrayAbout[0]["image_1"] ;
+   $arrayHTML['IMAGEM2'] = $arrayAbout[0]["image_2"] ;
+   $arrayHTML['IMAGEM3'] = $arrayAbout[0]["image_3"] ;
    $arrayHTML['DESCSHORT'] = $arrayAbout[0]["description_short"];
    $arrayHTML['DESCLONG'] = $arrayAbout[0]["description_long"];
    $body =  BasicWorks::CreateTemplate('modules/about/template/about.tpl',$arrayHTML);

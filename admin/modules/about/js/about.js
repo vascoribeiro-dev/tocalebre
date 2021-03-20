@@ -54,24 +54,24 @@ $(document).ready(function() {
     });
 
     $("#imageUploadHead").change(function() {
-        if(showImagemUpload(this,600,'imageUploadHead','imagePreviewHead')){
-            UploadImage('imageUploadHead','updateimagehead','about','about',0);
+        if(showImagemUpload(this,1200,'imageUploadHead','imagePreviewHead')){
+            UploadImage('imageUploadHead','updateimagehead','about','about');
         }
     });
 
     $("#imageUpload1").change(function() {
-        if(showImagemUpload(this,600,'imageUpload1','imagePreview1','about','about')){
-            UploadImage('imageUpload1','updateimage1',0);
+        if(showImagemUpload(this,1200,'imageUpload1','imagePreview1'){
+            UploadImage('imageUpload1','updateimage1','about','about');
         }
      });
      $("#imageUpload2").change(function() {
-        if(showImagemUpload(this,600,'imageUpload2','imagePreview2','about','about')){
-            UploadImage('imageUpload2','updateimage2',0);
+        if(showImagemUpload(this,1200,'imageUpload2','imagePreview2')){
+            UploadImage('imageUpload2','updateimage2','about','about');
         }
      });   
      $("#imageUpload3").change(function() {
-        if(showImagemUpload(this,600,'imageUpload3','imagePreview3','about','about')){
-            UploadImage('imageUpload3','updateimage3',0);
+        if(showImagemUpload(this,1200,'imageUpload3','imagePreview3')){
+            UploadImage('imageUpload3','updateimage3','about','about');
         }     
      });
 });

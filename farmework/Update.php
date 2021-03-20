@@ -10,15 +10,15 @@ Class Update{
 
         $location = 'imagesTMP/'.$name;
         move_uploaded_file($fileUpload['tmp_name'], $location);
-
+    
         return $location;
     }
+
     public static function MoveFileTo($pathTMP,$to)
     { 
         $file = str_replace("imagesTMP/", "", $pathTMP);
         $locationDestiny = $to.$file;
         $locationOrigin = $pathTMP;
-
         if(file_exists($locationOrigin)){
             if(rename($locationOrigin,$locationDestiny)){
                 Update::DeleteFile($locationOrigin);

@@ -44,7 +44,7 @@ $(document).ready(function() {
                 }).done(function(response){ //
                     if(response){
                         ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
-                        window.location.replace('index.php?p=userslist&m=users');
+                       //window.location.replace('index.php?p=userslist&m=users');
                     }else{
                         ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
                     }

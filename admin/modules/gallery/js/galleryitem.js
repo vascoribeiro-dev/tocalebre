@@ -10,18 +10,16 @@ $(document).ready(function() {
     });
 
     $(".saveform").click(function(event){
-        var  userId =$('#userId').val();
-        if(true  ){  // || (parseInt(userId) > 0 ? true : false)
-            var DESCSHORT = $('#DESCSHORT').trumbowyg('html');
-            var titlegallery =$('#titlegallery').val(); 
+        if(true){  
+            var  galleryId =$('#galleryId').val();
             $.ajax({
-                url : 'index.php?p=users&m=users',
+                url : 'index.php?p=galleryitem&m=gallery',
                 type: 'post',
-                data :  {imagemName: imagemName, o : (parseInt(userId) > 0 ? 'update' : 'insert') , premiss:JSON.stringify(premiss),useremail:useremail, userId:userId, nameuser : nameuser, username : username,  password : password}
+                data :  { o : (parseInt(galleryId) > 0 ? 'update' : 'insert') }
             }).done(function(response){ //
                 if(response){
                     ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
-
+                    window.location.replace('index.php?p=gallerylist&m=gallery');
                 }else{
                     ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
                 }
@@ -85,7 +83,7 @@ $(document).ready(function() {
 
 var num = 0;
 function readImage() {
-       UploadImage('pro-image','updateimage','gallery','galleryitem',0);
+
 
            
 

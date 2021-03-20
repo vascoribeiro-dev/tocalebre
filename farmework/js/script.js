@@ -123,7 +123,7 @@ function showImagemUpload(input,imgSizeStand, idelement,idShowImage){
 }
 
 
-function UploadImage(idimageUpload,tagUpload,module,page,num){
+function UploadImage(idimageUpload,tagUpload,module,page){
     var property = document.getElementById(idimageUpload).files[0];
     var form_data = new FormData();
     form_data.append("file",property);

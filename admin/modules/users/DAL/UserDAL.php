@@ -38,11 +38,11 @@ class UserDAL {
 
     public static function InsertUserPermissions($idUser,$idPage,$permission){
         $sqlExec = "insert into sys_rel_users_pages (id_user,id_page,permission) values (".$idUser.",".$idPage.",".($permission ? 1 : 0).")";
-        return DataBase::ExecuteQuery($sqlExec);
+        return DataBase::ExecuteQuery($sqlExec,'Insert');
     }
     public static function UpdateUserPermissions($idUser,$idPage,$permission){
         $sqlExec = "update sys_rel_users_pages set permission = ".($permission ? 1 : 0)." where id_user = ".$idUser." and id_page = ".$idPage;
-        return DataBase::ExecuteQuery($sqlExec);
+        return DataBase::ExecuteQuery($sqlExec,'Update');
     }
 
 
