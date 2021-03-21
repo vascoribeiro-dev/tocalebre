@@ -6,6 +6,18 @@ $(document).ready(function() {
     
     $(document).on('click', '.image-cancel', function() {
         let no = $(this).data('no');
+        var imageremove = $(this).data('path');
+        $.ajax({
+            url : 'index.php?p=galleryitem&m=gallery',
+            type: 'post',
+            data :  {imageremove: imageremove, o : 'removeimagem'}
+        }).done(function(response){ //
+            if(response){
+                ShowMessage('Imagem Removida. Obrigado','info');
+            }else{
+                ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
+            }
+        });
         $(".preview-image.preview-show-"+no).remove();
     });
 
@@ -15,11 +27,11 @@ $(document).ready(function() {
             $.ajax({
                 url : 'index.php?p=galleryitem&m=gallery',
                 type: 'post',
-                data :  { o : (parseInt(galleryId) > 0 ? 'update' : 'insert') }
+                data :  { o : (parseInt(galleryId) > 0 ? 'updategallery' : 'insertgallery') }
             }).done(function(response){ //
                 if(response){
                     ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
-                    window.location.replace('index.php?p=gallerylist&m=gallery');
+                    //window.location.replace('index.php?p=gallerylist&m=gallery');
                 }else{
                     ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
                 }
@@ -77,45 +89,40 @@ $(document).ready(function() {
             }
         });
     });
+
 });
 
+function UploadImageGallery(idimageUpload,tagUpload,module,page,num,output){
+    var property = document.getElementById(idimageUpload).files[0];
+    var form_data = new FormData();
+    form_data.append("file",property);
+    $.ajax({
+        url:'index.php?p='+page+'&m='+module+'&o=updateimagem',
+        method:'POST',
+        data:form_data,
+        contentType:false,
+        cache:false,
+        processData:false,
+        success:function(result){
+            ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
+            var html =  '<div class="preview-image preview-show-' + num + '">' +
+            '<div class="image-cancel" data-path="'+result+'" data-no="' + num + '">x</div>' +
+            '<div class="image-zone"><img id="pro-img-' + num + '" src="' + result + '"></div>' +
+            '</div>';
+            output.append(html);
+        }
+     });
+}
 
 
 var num = 0;
 function readImage() {
-
-
-           
-
-        if (window.File && window.FileList && window.FileReader) {
-            var files = event.target.files; //FileList object
-            var output = $(".preview-images-zone");
-
-            for (let i = 0; i < files.length; i++) {
-                var file = files[i];
-                if (!file.type.match('image')) continue;
-                
-                var picReader = new FileReader();
-                
-                picReader.addEventListener('load', function (event) {
-                    var picFile = event.target;
-                    var html =  '<div class="preview-image preview-show-' + num + '">' +
-                                '<div class="image-cancel" data-no="' + num + '">x</div>' +
-                                '<div class="image-zone"><img id="pro-img-' + num + '" data-name='+nameimage+' src="' + picFile.result + '"></div>' +
-                                
-                                '</div>';
-
-                    output.append(html);
-
-                
-                    num = num + 1;
-                });
-
-                picReader.readAsDataURL(file);
-            }
-            $("#pro-image").val('');
-        } else {
-            console.log('Browser not support');
-        }
+        var output = $(".preview-images-zone");
+        UploadImageGallery('pro-image','updateimage','gallery','galleryitem',num ,output);
+        num = num + 1;
+        $("#pro-image").val('');
 }
+
+
+
 

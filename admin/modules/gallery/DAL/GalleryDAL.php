@@ -10,7 +10,14 @@ class GalleryDAL {
         return DataBase::ExecuteQuery($sqlExec);
     }
 
-    public static function GetBlogOneorAll($idGalleryItem = false){
+    
+
+    public static function GetAllGalleryImage($idGalleryItem){
+        $sqlExec = "SELECT * FROM `tl_gallery_item_images` where  `id_tl_gallery_item` = ".$idGalleryItem; 
+        return DataBase::ExecuteQuery($sqlExec);
+    }
+
+    public static function GetGalleryOneorAll($idGalleryItem = false){
         $sqlExec = "SELECT a.id,al.`text`,al.`title`, a.`status`, al.id_sys_lang
         FROM `tl_gallery_items` a
         inner join  `tl_gallery_item_lang` al on   a.`id` = al.`id_tl_gallery_item`
@@ -27,6 +34,11 @@ class GalleryDAL {
 
     public static function UpdateGalleryItemLang($title,$text,$idblog,$idlang){
         $sqlExec = "UPDATE `tl_gallery_item_lang`  SET `text` = '".$text."' , `title` = '".$title."' WHERE `id_tl_gallery_item` = ".$idblog."  and `id_sys_lang` = ".$idlang." ";
+        return DataBase::ExecuteQuery($sqlExec,"Update");
+    }
+
+    public static function UpdateImageItem($image,$field){
+        $sqlExec = "update tl_gallery set  ".$field." = '".$image."' where `id` = 1 ";
         return DataBase::ExecuteQuery($sqlExec,"Update");
     }
 
@@ -50,6 +62,15 @@ class GalleryDAL {
     public static function InsertGalleryItem(){
         $sqlExec = "INSERT tl_gallery_items (STATUS) VALUES ('ACTIVE')";
         return DataBase::ExecuteQuery($sqlExec,"Insert");
+    }
+    public static function InsertGalleryItemImageItem($image,$idGalleryItem){
+        $sqlExec = "INSERT `tl_gallery_item_images` (`id_tl_gallery_item`,`image`) VALUES (".$idGalleryItem.",'".$image."');";
+        return DataBase::ExecuteQuery($sqlExec,"Insert");
+    }
+
+    public static function DeleteGalleryItemImageItem($idGalleryItem){
+        $sqlExec = "DELETE FROM  `tl_gallery_item_images` where `id_tl_gallery_item` = ".$idGalleryItem.";";
+        return DataBase::ExecuteQuery($sqlExec,"update");
     }
 
     public static function InsertGalleryItemLang($title,$text,$idGalleryItem,$idlang){

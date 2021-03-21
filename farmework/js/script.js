@@ -142,6 +142,7 @@ function UploadImage(idimageUpload,tagUpload,module,page){
             }).done(function(response){ //
                 if(response){
                     ShowMessage('Registo Gravado com Sucesso. Obrigado','success');
+                  
                 }else{
                     ShowMessage('Lamento, mas ocorreu um erro. Obrigado','error');
                 }

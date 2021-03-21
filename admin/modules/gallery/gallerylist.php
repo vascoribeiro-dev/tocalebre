@@ -15,7 +15,7 @@
          break;
          case 'delete':
             $idgalleryitem = BasicWorks::ParameterHelper('idgalleryitem',false,'POST');
-            GalleryDAL::UpdateStatusGalleryItem($idgalleryitem,'DESATIVE');
+            GalleryDAL::UpdateStatusGalleryItem($idgalleryitem,'DESACTIVE');
 
          break;
          case 'statusChange':

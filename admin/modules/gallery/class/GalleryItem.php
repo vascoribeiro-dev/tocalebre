@@ -38,8 +38,15 @@ class GalleryItem {
         $this->GalleryItemLang = $lang;
     }
 
+    function PutAllImages($imageArray){
+        $this->GalleryItemImagem[] = $imageArray;
+    }
+
     function PutImage($image){
-        $this->GalleryItemImagem = $image;
+        $this->GalleryItemImagem[$image] = $image;
+    }
+    function RemoveImage($image){
+        unset($this->GalleryItemImagem[$image]);
     }
 
     function PutID($id){

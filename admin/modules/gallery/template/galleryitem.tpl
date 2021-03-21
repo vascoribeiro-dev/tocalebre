@@ -12,10 +12,10 @@
                         <div class="col-xl-12">
                             <fieldset class="form-group">
                                 <a href="javascript:void(0)" onclick="$('#pro-image').click()">Upload Image</a>
-                                <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+                                <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control">
                             </fieldset>
                             <div class="preview-images-zone">
-                                
+                                [@ITEMIMAGE]
                             </div>
                         </div>
                     </div>
